@@ -38,6 +38,7 @@
 #include "Hacks/Sound.h"
 #include "Hacks/Triggerbot.h"
 #include "Hacks/Visuals.h"
+#include "Hacks/Resolver.h"
 
 #include "SDK/Client.h"
 #include "SDK/ClientState.h"
@@ -357,6 +358,14 @@ static void __stdcall frameStageNotify(FrameStage stage) noexcept
         Visuals::updateEventListeners();
     }
     if (interfaces->engine->isInGame()) {
+        if (stage == FrameStage::NET_UPDATE_END) {
+            for (int i = 1; i <= interfaces->engine->getMaxClients(); i++) {
+                auto entity = interfaces->entityList->getEntity(i);
+                if (!entity || entity->isOtherEnemy(localPlayer.get()))
+                    continue;
+                Resolver::frameStageUpdate(entity);
+            }
+        }
         Visuals::thirdperson();
         EnginePrediction::apply(stage);
         Visuals::drawBulletImpacts();

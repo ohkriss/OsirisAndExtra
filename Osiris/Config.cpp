@@ -366,6 +366,7 @@ static void from_json(const json& j, Config::Visuals& v)
     read(j, "No shadows", v.noShadows);
     read(j, "Wireframe smoke", v.wireframeSmoke);
     read(j, "Full bright", v.fullBright);
+    read(j, "No zoom", v.noZoom);
     read(j, "Zoom", v.zoom);
     read(j, "Zoom key", v.zoomKey);
     read(j, "Thirdperson", v.thirdperson);
@@ -744,6 +745,7 @@ static void to_json(json& j, const Config::Ragebot& o, const Config::Ragebot& du
     WRITE("Enabled", enabled);
     WRITE("Aimlock", aimlock);
     WRITE("Silent", silent);
+    WRITE("Resolver", resolver);
     WRITE("Friendly fire", friendlyFire);
     WRITE("Visible only", visibleOnly);
     WRITE("Scoped only", scopedOnly);
@@ -994,6 +996,7 @@ static void to_json(json& j, const Config::Visuals& o)
     WRITE("No shadows", noShadows);
     WRITE("Wireframe smoke", wireframeSmoke);
     WRITE("Full bright", fullBright);
+    WRITE("No zoom", noZoom);
     WRITE("Zoom", zoom);
     WRITE("Zoom key", zoomKey);
     WRITE("Thirdperson", thirdperson);
